@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FeatureCard from '@/components/FeatureCard';
-import heroBanner from '@/assets/hero-banner.jpg';
+import heroBanner from '@/assets/hero-banner.png';
 
 const Index = () => {
   return (

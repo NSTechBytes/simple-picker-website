@@ -3,9 +3,9 @@ import { Download, Eye, Palette, Settings, Monitor, Keyboard, Clock, Zap, Rotate
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FeatureCard from '@/components/FeatureCard';
-import colorSelectorDemo from '@/assets/color-selector-demo.jpg';
-import screenPickerDemo from '@/assets/screen-picker-demo.jpg';
-import trayMenuDemo from '@/assets/tray-menu-demo.jpg';
+import colorSelectorDemo from '@/assets/color-selector-demo.png';
+import screenPickerDemo from '@/assets/screen-picker-demo.png';
+import trayMenuDemo from '@/assets/tray-menu-demo.png';
 
 const Features = () => {
   return (
@@ -86,7 +86,7 @@ const Features = () => {
                 <img 
                   src={colorSelectorDemo} 
                   alt="Color selector interface with color wheel"
-                  className="relative rounded-2xl shadow-xl border border-border/50 w-full"
+                  className="relative rounded-2xl shadow-xl border border-border/50 w-full max-w-md mx-auto"
                 />
               </div>
             </div>
@@ -176,7 +176,7 @@ const Features = () => {
                 <img 
                   src={screenPickerDemo} 
                   alt="Screen color picker with magnifier"
-                  className="relative rounded-2xl shadow-xl border border-border/50 w-full"
+                  className="relative rounded-2xl shadow-xl border border-border/50 w-full max-w-md mx-auto"
                 />
               </div>
             </div>
