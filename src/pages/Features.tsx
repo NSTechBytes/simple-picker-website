@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Download, Eye, Palette, Settings, Monitor, Keyboard, Clock, Zap, RotateCcw, Github } from 'lucide-react';
 import Navbar from '@/components/Navbar';
+import { useLatestRelease } from '@/hooks/useLatestRelease';
 import Footer from '@/components/Footer';
 import FeatureCard from '@/components/FeatureCard';
 import colorSelectorDemo from '@/assets/color-selector-demo.png';
@@ -8,6 +9,8 @@ import screenPickerDemo from '@/assets/screen-picker-demo.png';
 import trayMenuDemo from '@/assets/tray-menu-demo.png';
 
 const Features = () => {
+  const { downloadUrl, version, loading } = useLatestRelease();
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -237,10 +240,16 @@ const Features = () => {
             Download SimplePicker now and discover how these powerful features can streamline your color workflow.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="secondary" size="lg" className="text-lg px-8 py-6" asChild>
-              <a href="https://github.com/NSTechBytes/simple-picker/releases/latest">
+            <Button 
+              variant="secondary" 
+              size="lg" 
+              className="text-lg px-8 py-6" 
+              asChild
+              disabled={loading || !downloadUrl}
+            >
+              <a href={downloadUrl || "#"}>
                 <Download className="mr-2 h-5 w-5" />
-                Download SimplePicker
+                {loading ? 'Loading...' : `Download ${version || 'Latest'}`}
               </a>
             </Button>
             <Button variant="outline" size="lg" className="text-lg px-8 py-6 bg-white/10 border-white/20 text-white hover:bg-white/20" asChild>

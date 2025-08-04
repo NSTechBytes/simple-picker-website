@@ -2,9 +2,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Download, Github, Palette, Target, Users, Zap } from 'lucide-react';
 import Navbar from '@/components/Navbar';
+import { useLatestRelease } from '@/hooks/useLatestRelease';
 import Footer from '@/components/Footer';
 
 const About = () => {
+  const { downloadUrl, version, loading } = useLatestRelease();
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -163,10 +166,16 @@ const About = () => {
             Join thousands of designers and developers who rely on SimplePicker for their color workflow needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="secondary" size="lg" className="text-lg px-8 py-6" asChild>
-              <a href="https://github.com/NSTechBytes/simple-picker/releases/latest">
+            <Button 
+              variant="secondary" 
+              size="lg" 
+              className="text-lg px-8 py-6" 
+              asChild
+              disabled={loading || !downloadUrl}
+            >
+              <a href={downloadUrl || "#"}>
                 <Download className="mr-2 h-5 w-5" />
-                Download Now
+                {loading ? 'Loading...' : `Download ${version || 'Latest'}`}
               </a>
             </Button>
             <Button variant="outline" size="lg" className="text-lg px-8 py-6 bg-white/10 border-white/20 text-white hover:bg-white/20" asChild>
