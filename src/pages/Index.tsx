@@ -4,9 +4,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FeatureCard from '@/components/FeatureCard';
+import { useLatestRelease } from '@/hooks/useLatestRelease';
 import heroBanner from '@/assets/hero-banner.png';
 
 const Index = () => {
+  const { downloadUrl, version, loading } = useLatestRelease();
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -26,10 +29,16 @@ const Index = () => {
                 SimplePicker is a powerful system tray utility that makes color selection effortless. Pick any color from your screen, manage palettes, and copy values instantly.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button variant="secondary" size="lg" className="text-lg px-8 py-6" asChild>
-                  <a href="https://github.com/NSTechBytes/simple-picker/releases/latest" id="download">
+                <Button 
+                  variant="secondary" 
+                  size="lg" 
+                  className="text-lg px-8 py-6" 
+                  asChild
+                  disabled={loading || !downloadUrl}
+                >
+                  <a href={downloadUrl || "#"} id="download">
                     <Download className="mr-2 h-5 w-5" />
-                    Download Now
+                    {loading ? 'Loading...' : `Download ${version || 'Latest'}`}
                   </a>
                 </Button>
                 <Button variant="outline" size="lg" className="text-lg px-8 py-6 bg-white/10 border-white/20 text-white hover:bg-white/20" asChild>
@@ -96,10 +105,16 @@ const Index = () => {
             Download SimplePicker today and streamline your color workflow. It's free, lightweight, and designed for professionals.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="secondary" size="lg" className="text-lg px-8 py-6" asChild>
-              <a href="https://github.com/NSTechBytes/simple-picker/releases/latest">
+            <Button 
+              variant="secondary" 
+              size="lg" 
+              className="text-lg px-8 py-6" 
+              asChild
+              disabled={loading || !downloadUrl}
+            >
+              <a href={downloadUrl || "#"}>
                 <Download className="mr-2 h-5 w-5" />
-                Download for Windows
+                {loading ? 'Loading...' : `Download for Windows ${version || ''}`}
               </a>
             </Button>
             <Dialog>
@@ -133,10 +148,14 @@ const Index = () => {
                     </ul>
                   </div>
                   <div className="pt-4 border-t">
-                    <Button asChild className="w-full">
-                      <a href="https://github.com/NSTechBytes/simple-picker/releases/latest">
+                    <Button 
+                      asChild 
+                      className="w-full"
+                      disabled={loading || !downloadUrl}
+                    >
+                      <a href={downloadUrl || "#"}>
                         <Download className="mr-2 h-4 w-4" />
-                        Download Now
+                        {loading ? 'Loading...' : `Download ${version || 'Latest'}`}
                       </a>
                     </Button>
                   </div>

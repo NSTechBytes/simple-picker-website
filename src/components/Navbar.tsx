@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
+import { useLatestRelease } from '@/hooks/useLatestRelease';
 import simplePickerLogo from '@/assets/simplepicker-logo.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { downloadUrl, loading } = useLatestRelease();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -43,9 +45,14 @@ const Navbar = () => {
                 {item.label}
               </Link>
             ))}
-            <Button variant="hero" size="sm" asChild>
-              <a href="https://github.com/NSTechBytes/simple-picker/releases/latest" className="ml-4">
-                Download
+            <Button 
+              variant="hero" 
+              size="sm" 
+              asChild 
+              disabled={loading || !downloadUrl}
+            >
+              <a href={downloadUrl || "#"} className="ml-4">
+                {loading ? 'Loading...' : 'Download'}
               </a>
             </Button>
           </div>
@@ -81,9 +88,15 @@ const Navbar = () => {
                   {item.label}
                 </Link>
               ))}
-              <Button variant="hero" size="sm" asChild className="w-fit">
-                <a href="https://github.com/NSTechBytes/simple-picker/releases/latest">
-                  Download
+              <Button 
+                variant="hero" 
+                size="sm" 
+                asChild 
+                className="w-fit"
+                disabled={loading || !downloadUrl}
+              >
+                <a href={downloadUrl || "#"}>
+                  {loading ? 'Loading...' : 'Download'}
                 </a>
               </Button>
             </div>
